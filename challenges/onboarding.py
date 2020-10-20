@@ -1,4 +1,4 @@
-# Introduction - Python 3
+# https://www.codingame.com/training/easy/onboarding
 
 while True:
     enemy_1 = input()
