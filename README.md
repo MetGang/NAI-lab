@@ -8,3 +8,4 @@
 
 * [Onboarding](challenges/onboarding.py)
 * [The Descent](challenges/the_descent.py)
+* [Power of Thor - Episode 1](challenges/power_of_thor_1.py)
