@@ -2,21 +2,21 @@
 
 import math
 
-dstX, dstY, x, y = [ int(i) for i in input().split() ]
+dst_x, dst_y, x, y = [ int(i) for i in input().split() ]
 
 def sign(x):
     return (x > 0) - (x < 0)
 
-hName = [ 'W', '', 'E' ]
-vName = [ 'N', '', 'S' ]
+h_name = [ 'W', '', 'E' ]
+v_name = [ 'N', '', 'S' ]
 
 while True:
     remaining_turns = int(input())
 
-    signX = sign(dstX - x)
-    signY = sign(dstY - y)
+    sign_x = sign(dst_x - x)
+    sign_y = sign(dst_y - y)
 
-    print(vName[signY + 1] + hName[signX + 1])
+    print(v_name[sign_y + 1] + h_name[sign_x + 1])
 
-    x += signX
-    y += signY
+    x += sign_x
+    y += sign_y
