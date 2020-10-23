@@ -13,7 +13,7 @@ if n != 0:
         if abs(t) < abs(closest):
             closest = t
         elif abs(t) == abs(closest):
-            closest = abs(t)
+            closest = t if closest < 0 else abs(t)
 
     print(closest)
 else:
