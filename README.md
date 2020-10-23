@@ -6,6 +6,7 @@
 
 ##### Done challenges
 
+* [ASCII Art](challenges/ascii-art.py)
 * [Onboarding](challenges/onboarding.py)
 * [Power of Thor - Episode 1](challenges/power-of-thor-episode-1.py)
 * [Temperatures](challenges/temperatures.py)
