@@ -5,12 +5,7 @@ import math
 dstX, dstY, x, y = [ int(i) for i in input().split() ]
 
 def sign(x):
-    if x < 0:
-        return -1
-    elif x == 0:
-        return 0
-    else:
-        return 1
+    return (x > 0) - (x < 0)
 
 hName = [ 'W', '', 'E' ]
 vName = [ 'N', '', 'S' ]
