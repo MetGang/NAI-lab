@@ -1,3 +1,4 @@
+# Patryk Kośmider s16863
 # https://www.codingame.com/training/easy/onboarding
 
 while True:

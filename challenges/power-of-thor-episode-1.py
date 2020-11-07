@@ -1,3 +1,4 @@
+# Patryk Kośmider s16863
 # https://www.codingame.com/ide/puzzle/power-of-thor-episode-1
 
 import math
