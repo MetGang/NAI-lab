@@ -80,7 +80,9 @@ function aiAction()
 
     if (chosen == null) 
     {
-        if (areas[0].textContent == '')
+        if (!aiStarted && areas[4].textContent == '')
+            chosen = 4
+        else if (areas[0].textContent == '')
             chosen = 0
         else if (areas[8].textContent == '')
             chosen = 8
