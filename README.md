@@ -11,3 +11,7 @@
 * [Power of Thor - Episode 1](challenges/power-of-thor-episode-1.py)
 * [Temperatures](challenges/temperatures.py)
 * [The Descent](challenges/the-descent.py)
+
+## TicTacToe
+
+[Game folder](tictactoe/)

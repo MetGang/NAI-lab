@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    background-color: lightgray;
+}
+
+.main-box {
+    text-align: center;
+}
+
+.area-box {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 10vmax);
+    grid-template-rows: repeat(3, 10vmax);
+}
+
+.area {
+    padding: 8px;
+    font-size: 8vmax;
+    display: grid;
+    align-content: center;
+    user-select: none;
+}
+
+.n { border-top: 1px solid #000; }
+.s { border-bottom: 1px solid #000; }
+.e { border-left: 1px solid #000; }
+.w { border-right: 1px solid #000; }

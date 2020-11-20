@@ -1,0 +1,47 @@
+<!-- 
+    Patryk Kośmider s16863
+    Krzysztof Marek s16663
+ -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>NAI TicTacToe</title>
+
+        <script src="./index.js" defer></script>
+        <link rel="stylesheet" href="index.css">
+
+    </head>
+
+    <body>
+
+        <div class="main-box">
+            Human
+            <input type="radio" name="xoro" id="humanStarts" checked>
+            <input type="radio" name="xoro" id="aiStarts">
+            AI
+            <br>
+            <button onclick="startGame()">Start</button>
+            <br>
+            <div class="area-box">
+                <div id="area-0" class="area s w"></div>
+                <div id="area-1" class="area s w e"></div>
+                <div id="area-2" class="area s e"></div>
+                <div id="area-3" class="area n s w"></div>
+                <div id="area-4" class="area n s w e"></div>
+                <div id="area-5" class="area n s e"></div>
+                <div id="area-6" class="area n w"></div>
+                <div id="area-7" class="area n w e"></div>
+                <div id="area-8" class="area n e"></div>
+            </div>
+        </div>
+    
+    </body>
+
+</html>
