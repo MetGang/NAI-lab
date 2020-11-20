@@ -4,10 +4,19 @@
 // Gra: Kołko i krzyżyk
 // Reguły: https://pl.wikipedia.org/wiki/K%C3%B3%C5%82ko_i_krzy%C5%BCyk
 
+// Element HTML będący polem na planszy gry
 let areas = Array.from(Array(9).keys()).map(elem => document.getElementById(`area-${elem}`))
+
+// Zmienna określająca czy sztuczna inteligencja rozpoczyna grę
 let aiStarted
+
+// Zmienna odpowiedzialna za identyfikację obecnej rundy (X lub O)
 let round
+
+// Zmienna "pilnująca" czy gra wciąż trwa
 let gameover = true
+
+// Tablica możliwych ułożeń na planszy zapewniających wygraną
 let boardCombos = [
     [ 0, 1, 2 ],
     [ 3, 4, 5 ],
@@ -19,10 +28,12 @@ let boardCombos = [
     [ 2, 4, 6 ],
 ]
 
+// Przypisanie logiki gracza do eventu kliknięcia pola
 areas.forEach((elem, index) => {
     elem.onclick = () => { playerAction(index) }
 })
 
+// Logika gracza
 function playerAction(index)
 {
     if (!gameover && areas[index].textContent == '')
@@ -36,6 +47,7 @@ function playerAction(index)
     }
 }
 
+// Logika sztucznej inteligencji
 function aiAction()
 {
     let aiChar = round ? 'X' : 'O'
@@ -95,6 +107,7 @@ function aiAction()
     clickArea(chosen, 'ai')
 }
 
+// Logika kliknięcia w pole
 function clickArea(index, player)
 {
     areas[index].textContent = round ? 'X' : 'O'
@@ -106,7 +119,6 @@ function clickArea(index, player)
     {
         if (result !== false)
         {
-
             result.forEach((value) => {
                 areas[value].style.backgroundColor = player == 'ai' ? '#f004' : '#0f04'
             })
@@ -122,6 +134,7 @@ function clickArea(index, player)
     round = !round
 }
 
+// Sprawdzanie stanu planszy (wygrana, remis, gra wciąż trwa)
 function checkWinCondtion()
 {
     if (areas[0].textContent != '' && areas[0].textContent == areas[1].textContent && areas[1].textContent == areas[2].textContent) return [ 0, 1, 2 ]
@@ -138,6 +151,7 @@ function checkWinCondtion()
     return null;
 }
 
+// Rozpoczęcie gry, "wyzerowanie" zmiennych
 function startGame()
 {
     areas.forEach((elem) => {
