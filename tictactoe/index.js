@@ -33,7 +33,10 @@ areas.forEach((elem, index) => {
     elem.onclick = () => { playerAction(index) }
 })
 
-// Logika gracza
+/**
+ * Logika gracza
+ * @param {*} index - indeks klikniętego pola na planszy
+ */
 function playerAction(index)
 {
     if (!gameover && areas[index].textContent == '')
@@ -107,7 +110,11 @@ function aiAction()
     clickArea(chosen, 'ai')
 }
 
-// Logika kliknięcia w pole
+/**
+ * Logika kliknięcia w pole
+ * @param {*} index - indeks klikniętego pola
+ * @param {*} player - oznaczenie gracza, który wykonał ruch
+ */
 function clickArea(index, player)
 {
     areas[index].textContent = round ? 'X' : 'O'
@@ -134,7 +141,13 @@ function clickArea(index, player)
     round = !round
 }
 
-// Sprawdzanie stanu planszy (wygrana, remis, gra wciąż trwa)
+/**
+ * Sprawdzanie stanu planszy (wygrana, remis, gra wciąż trwa)
+ * Zwraca:
+ * - tablicę zawierającą indeksy pól tworzących linię w przypadku wygranej,
+ * - fałsz w przypadku trwającej rozgrywki
+ * - null w każdym innym przypadku
+ */
 function checkWinCondtion()
 {
     if (areas[0].textContent != '' && areas[0].textContent == areas[1].textContent && areas[1].textContent == areas[2].textContent) return [ 0, 1, 2 ]
@@ -148,7 +161,7 @@ function checkWinCondtion()
 
     if (areas.every(elem => elem.textContent != '')) return false
 
-    return null;
+    return null
 }
 
 // Rozpoczęcie gry, "wyzerowanie" zmiennych
