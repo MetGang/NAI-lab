@@ -15,3 +15,6 @@
 ## TicTacToe
 
 [Game folder](tictactoe/)
+## Fuzzy logic
+
+[Game review](fuzzy-logic/gamereview.py)
