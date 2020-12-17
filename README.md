@@ -18,3 +18,6 @@
 ## Fuzzy logic
 
 [Game review](fuzzy-logic/gamereview.py)
+## Movie suggester
+
+[Suggester](movie-suggester/moviesuggester.py)
