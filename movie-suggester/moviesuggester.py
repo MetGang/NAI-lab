@@ -6,6 +6,7 @@
 
 import json
 from compute_scores import euclidean_score, pearson_score
+from collections import OrderedDict
 
 def get_common_movies(dataset, u1, u2):
     common = []
@@ -47,84 +48,50 @@ with open('dataset.json', 'r', encoding = 'utf-8') as file:
     dataset = json.load(file)
 
 user = input('Enter user name: ')
-best = [ 0, '' ]
-worst = [ 0, '' ]
 
-with open('result.txt', 'w', encoding = 'utf-8') as file:
-    file.write(f'Data for user {user}\n')
+if user not in dataset:
+    raise RuntimeError("User not found!")
 
-    for respondent in dataset:
-        if user == respondent:
+to_remove = []
+
+for respondent in dataset:
+    #PS -> 1.0 = perfect correlation, -1.0 = reverse correlation, 0.0 = no correlation
+    dataset[respondent]['ps_score'] = pearson_score(dataset, user, respondent)
+    #EU -> 1.0 = perfect, 0.0 = imperfect, more = better, less = worse
+    dataset[respondent]['eu_score'] = euclidean_score(dataset, user, respondent)
+    if user == respondent:
+        dataset[respondent]['ps_score'] = 0.0
+        dataset[respondent]['eu_score'] = 0.0
+    if dataset[respondent]['ps_score'] < 0.5:
+        to_remove.append(respondent)
+best_users = dataset.copy()
+for respondent in to_remove:
+    best_users.pop(respondent)
+best_users = OrderedDict(sorted(best_users.items(), key=lambda item: item[1]['eu_score']))
+best_movies = OrderedDict()
+for respondent in best_users:
+    for movie in best_users[respondent]:
+        if movie == 'eu_score' or movie == 'ps_score' or movie in dataset[user]:
             continue
-
-        ps_score = round(pearson_score(dataset, user, respondent), 2)
-
-        # No correlation
-        if ps_score == 0:
-            file.write(f'\n[0] No correlation with {respondent}\n')
-            continue
-
-        eu_score = round(euclidean_score(dataset, user, respondent), 2)
-
-        # Positive correlation
-        if ps_score > 0:
-            if eu_score * ps_score > best[0]:
-                best[0] = ps_score
-                best[1] = respondent
-            
-            file.write(f'\n[+] {get_positive_strength(ps_score)} correlation with {respondent}\n')
-
-            common = get_common_movies(dataset, respondent, user)
-
-            file.write(f'\tYou both tend to like:\n')
-            for movie in common:
-                m1 = dataset[respondent][movie]
-                m2 = dataset[user][movie]
-                if m1 > 5 and m2 > 5:
-                    file.write(f'\t\t- "{movie}"\n')
-
-            file.write(f'\tYou both tend to dislike:\n')
-            for movie in common:
-                m1 = dataset[respondent][movie]
-                m2 = dataset[user][movie]
-                if m1 < 5 and m2 < 5:
-                    file.write(f'\t\t- "{movie}"\n')
-
-            different = get_different_movies(dataset, respondent, user)
-
-            file.write(f'\tI suggest you to watch:\n')
-            for movie in different:
-                if dataset[respondent][movie] * eu_score > 2:
-                    file.write(f'\t\t- "{movie}"\n')
-                
-        # Negative correlation
-        elif ps_score < 0:
-            if eu_score * ps_score < worst[0]:
-                worst[0] = ps_score
-                worst[1] = respondent
-
-            file.write(f'\n[-] {get_negative_strength(ps_score)} correlation with {respondent}\n')
-
-            common = get_common_movies(dataset, respondent, user)
-
-            file.write(f'\tYou both tend to disagree on:\n')
-            for movie in common:
-                m1 = dataset[respondent][movie]
-                m2 = dataset[user][movie]
-                if abs(m1 - m2) > 4:
-                    file.write(f'\t\t- "{movie}"\n')
-
-            different = get_different_movies(dataset, respondent, user)
-
-            file.write(f'\tYou probably should not watch:\n')
-            for movie in different:
-                if dataset[respondent][movie] * eu_score > 1:
-                    file.write(f'\t\t- "{movie}"\n')
-            
-            file.write(f'\tYou may like to watch:\n')
-            for movie in different:
-                if dataset[respondent][movie] * eu_score < 0.5:
-                    file.write(f'\t\t- "{movie}"\n')
-            
-    file.write(f'\nBest match: {best[1]}\n')
-    file.write(f'Worst match: {worst[1]}\n')
+        if movie in best_movies:
+            best_movies[movie] = [best_movies[movie][0] + best_users[respondent][movie] * best_users[respondent]['eu_score'], best_movies[movie][1] + 1]
+        else:
+            best_movies[movie] = [best_users[respondent][movie] * best_users[respondent]['eu_score'], 1]
+for movie in best_movies:
+    best_movies[movie][0] = best_movies[movie][0] / best_movies[movie][1]
+best_movies = OrderedDict(sorted(best_movies.items(), key=lambda item: (item[1][1], item[1][0]), reverse=True))
+i = 0
+print('Movies you should watch:')
+for movie in best_movies:
+    print(movie)
+    i = i + 1
+    if i == 5:
+        break
+worst_movies = OrderedDict(sorted(best_movies.items(), key=lambda item: (item[1][0]), reverse=False))
+i = 0
+print('\nMovies you shouldn\'t watch:')
+for movie in worst_movies:
+    print(movie)
+    i = i + 1
+    if i == 5:
+        break
