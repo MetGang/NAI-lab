@@ -21,3 +21,6 @@
 ## Movie suggester
 
 [Suggester](movie-suggester/moviesuggester.py)
+## Classification
+
+[Classification](classification/classification.py)
