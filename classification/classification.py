@@ -16,16 +16,16 @@ from sklearn.svm import SVC
 
 def get_SVC():
     """ 
-		Helper returning classification engine.
-		
-		Returns: 
-			SVC: C-Support Vector classification engine
+        Helper returning classification engine.
+        
+        Returns: 
+            SVC: C-Support Vector classification engine
     """
     return SVC(kernel = 'linear')
 
 def testify(inputs, targets, test_size):
     """ 
-		Performs training and testing on datasets with given size of test sample.
+        Performs training and testing on datasets with given size of test sample.
 
         Parameters:
             inputs (array): Array containg inputs for train function.
@@ -54,7 +54,7 @@ def testify(inputs, targets, test_size):
 
 def breast_cancer():
     """ 
-		Classification on breast cancer dataset imported from sklearn datasets
+        Classification on breast cancer dataset imported from sklearn datasets
     """
     print('Breast cancer problem:')
 
@@ -64,7 +64,7 @@ def breast_cancer():
 
 def wine_quality():
     """ 
-		Classification on wine quality dataset got from http://archive.ics.uci.edu/ml/datasets
+        Classification on wine quality dataset got from http://archive.ics.uci.edu/ml/datasets
     """
     print('Wine quality problem:')
 
