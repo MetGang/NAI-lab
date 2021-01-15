@@ -2,7 +2,20 @@
 # Krzysztof Marek s16663
 # 
 # 1st dataset -> http://archive.ics.uci.edu/ml/datasets/Wine+Quality
+# The Wine Quality Dataset involves predicting the quality of white wines on a scale given chemical measures of each wine.
+# 
 # 2nd dataset -> https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html
+# The Breast Cancer Dataset involves predicting the probability of positive case of breast cancer with given attributes.
+# 
+# Problem:
+# A classification problem is when the output variable is a category (basically 'yes' or 'no').
+# A classification model attempts to draw some conclusion from observed values.
+# Given one or more inputs a classification model will try to predict the value of one or more outcomes.
+# 
+# Usage:
+# python classification.py `test_size`
+
+import sys
 
 import numpy
 
@@ -60,7 +73,7 @@ def breast_cancer():
 
     predata = load_breast_cancer()
 
-    testify(predata['data'], predata['target'], 0.3)
+    testify(predata['data'], predata['target'], float(sys.argv[1]))
 
 def wine_quality():
     """ 
@@ -70,7 +83,7 @@ def wine_quality():
 
     predata = numpy.genfromtxt('wine_quality.csv', delimiter = ';', dtype = float, encoding = 'utf8')
 
-    testify(predata[1:, :11], predata[1:, 11], 0.3)
+    testify(predata[1:, :11], predata[1:, 11], float(sys.argv[1]))
 
 if __name__ == "__main__":
     # Breast cancer classification
