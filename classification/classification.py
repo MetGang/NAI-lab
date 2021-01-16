@@ -62,7 +62,7 @@ def testify(inputs, targets, test_size):
     # Ability not to label a sample as positive when it is negative
     print('    Precision:', round(metrics.precision_score(y_test, y_pred, average = 'weighted', zero_division = 0), 2))
 
-    # Ability yto find all positive samples
+    # Ability to find all positive samples
     print('    Recall:', round(metrics.recall_score(y_test, y_pred, average = 'weighted', zero_division = 0), 2))
 
 def breast_cancer():
