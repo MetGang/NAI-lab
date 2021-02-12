@@ -28,3 +28,7 @@
 ## Machine learning
 
 [Machine learning](ml/)
+
+## GYM Q-Learning
+
+[GYM Q-Learning](gym/)
